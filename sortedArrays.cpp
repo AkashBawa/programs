@@ -3,6 +3,8 @@
 #include<string>  
 #include <sstream>
 
+
+// Question : find all sorted array from given two sorted arrays constion , first element is always from first array and last elemnt is always from second array
 using namespace std;
 namespace patch
 {
