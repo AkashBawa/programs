@@ -71,6 +71,31 @@ void createHeap(int arr[],int index){
 }
 
 
+// create heap using heapify
+void heapify(int arr[], int index, int size){
+	
+	int leftChild = 2 * index + 1;
+	int rightChild = 2 * index + 2;
+	
+	if(rightChild < size){
+		
+		int max = arr[leftChild] > arr[rightChild] ? leftChild : rightChild;
+		
+		if(arr[max] > arr[index]){
+			swap(arr[max], arr[index]);
+			heapify(arr, max, size);
+		}
+		
+	} else if(leftChild < size) {
+		if(arr[leftChild] > arr[index]){
+			swap(arr[leftChild], arr[index]);
+		}
+	} else {
+		return;
+	}
+	
+}	
+
 
 int main(){
 	int n;
@@ -80,10 +105,15 @@ int main(){
 	int arr[n];
 	for(int i = 0; i < n; i++){
 		cin>>arr[i];
-		createHeap(arr, i);
+//		createHeap(arr, i);   // this will create heap in nlon(n) time;
+	}
+//	heapSort(arr, n);    // heap lost nlog(n) for insertion and nlog(n) for deletion  , overall nlog(n)
+	
+	
+	for(int i = n - 1; i >=0; i--){
+		heapify(arr, i, n);
 	}
 	
-	heapSort(arr, n);
 	print(arr, n);
 	return 0;
 }
