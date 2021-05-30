@@ -12,7 +12,8 @@ class Node {
 };
 
 int findMaxSumPath(Node*);
-
+int maxSumFromAnyPath(Node*, int&);
+ 
 Node* addNode(int value){
 	Node *temp  = new Node();
 	temp->value = value;
@@ -50,6 +51,8 @@ void printInLevelOrder(Node* start){	// breath first scan
 }
 
 int main(){
+
+	// example 1
 	Node* start = addNode(10);
 	start->left = addNode(2);
 	start->right = addNode(10);
@@ -59,11 +62,55 @@ int main(){
     start->right->right->left = addNode(3);
     start->right->right->right = addNode(4);
 
+	
+	// example 2
+//	Node* start = addNode(1);
+//	start->left = addNode(2);
+//	start->right = addNode(3);
+	
 //	printNode(start);
 //	printInLevelOrder(start);
+	int max = 0;
 	
-	cout<<findMaxSumPath(start);
+	maxSumFromAnyPath(start , max);
+	cout<<"max is "<<max<<endl;
+	
 	return 0;
+}
+
+int maxSumFromAnyPath(Node* current, int &max){
+	
+	int leftSum = 0;
+	int rightSum = 0;
+	if(current->left){
+		leftSum = maxSumFromAnyPath(current->left, max);
+	}
+	if(current->right){
+		rightSum = maxSumFromAnyPath(current->right, max);
+	}
+	
+	int maxForParent = 0;
+	int currentMax = 0;
+	
+	int greater = rightSum > leftSum ? rightSum : leftSum;
+	
+	if(rightSum > 0 && leftSum > 0){
+		currentMax = current->value + rightSum + leftSum;
+	} else {
+		currentMax = current->value + greater;
+	}
+	
+	maxForParent = current->value + greater;
+		
+	if(currentMax > max){
+	
+		max = currentMax;
+	}
+	
+	if(maxForParent > 0){
+		return maxForParent;
+	} 
+	else return 0;
 }
 
 int findMaxSumPath(Node* current){
@@ -87,10 +134,6 @@ int findMaxSumPath(Node* current){
 	} 
 	else return 0;
 }	
-
-
-
-
 
 
 
