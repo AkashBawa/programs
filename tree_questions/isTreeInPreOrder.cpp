@@ -54,14 +54,14 @@ void printArr(int arr[], int size){
 	cout<<endl;
 }
 
-bool comparePreoderArray(Node* start, int arr[] ,int &index){	// breath first scan
+bool compareInoderArray(Node* start, int arr[] ,int &index){	// breath first scan
 
 	if(start == NULL){
 		return true;
 	}
 	else {
 		
-		if(comparePreoderArray(start->left, arr, index) == false){
+		if(compareInoderArray(start->left, arr, index) == false){
 			return false;
 		}
 		
@@ -71,6 +71,32 @@ bool comparePreoderArray(Node* start, int arr[] ,int &index){	// breath first sc
 			return false;
 		}
 		index++;
+		if(!compareInoderArray(start->right, arr, index)){
+			return false;
+		}
+		return true;
+			
+	}
+}
+
+bool comparePreoderArray(Node* start, int arr[] ,int &index){	// breath first scan
+
+	if(start == NULL){
+		return true;
+	}
+	else {
+		
+		cout<<"index is "<<index<<endl;
+		cout<<"strat value "<<start->value <<" index value "<<arr[index]<<endl<<endl; 
+		if(arr[index] !=  start->value){
+			return false;
+		}
+		index++;
+		
+		if(comparePreoderArray(start->left, arr, index) == false){
+			return false;
+		}
+		
 		if(!comparePreoderArray(start->right, arr, index)){
 			return false;
 		}
@@ -92,9 +118,12 @@ int main(){
     start->right->right->right = addNode(4);
     
 	
-	int arr[] = {20,2,1,20,10,3,-25,4};
+	int inOrderarr[] = {20,2,1,20,10,3,-25,4};
+	int preOrder[] = {20,2,20,1,10,-25,3,4};
 	int index = 0;
-	if(comparePreoderArray(start,arr, index)){
+	
+	
+	if(comparePreoderArray(start,preOrder, index)){
 		cout<<"array represent pre order "<<endl;
 	} else {
 		cout<<"array does not represent pre order";
