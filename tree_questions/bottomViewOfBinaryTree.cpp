@@ -1,16 +1,16 @@
 #include <iostream>
 #include <queue>
+#include <map>
 
 using namespace std;
 
 class Node {
 	public : 
-	int value;
-	Node *left;
-	Node *right;
+		int value;
+		Node *left;
+		Node *right;
 };
 
- 
 Node* addNode(int value){
 	Node *temp  = new Node();
 	temp->value = value;
@@ -54,24 +54,6 @@ void printArr(int arr[], int size){
 	cout<<endl;
 }
 
-bool isCompleteBinaryTree(Node* start){
-	if(start == NULL){
-		return true;
-	}
-	
-	if(start->left == NULL && start->right != NULL){
-		return false;
-	} else if(start->left != NULL && start->right == NULL){
-		return false;
-	}
-	if(isCompleteBinaryTree(start->left) == false){
-		return false;
-	}
-	if(isCompleteBinaryTree(start->right) == false){
-		return false;
-	}
-	return true;
-}
 
 int main(){
 	
@@ -82,8 +64,8 @@ int main(){
 	start->left->left = addNode(20);
 	start->left->right = addNode(1);
     start->right->right = addNode(-25);
-//    start->right->right->left = addNode(3);
-//    start->right->right->right = addNode(4);
+    start->right->right->left = addNode(3);
+    start->right->right->right = addNode(4);
 //    
 	
 	if(isCompleteBinaryTree(start)){
