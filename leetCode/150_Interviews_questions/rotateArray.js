@@ -4,8 +4,8 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function(nums, k) {
-    let n = nums.length;
-    let lastIndex = n - 1;
+    // let n = nums.length;
+    // let lastIndex = n - 1;
 
     //  time out
     // for(let i = 0; i < k; i++) {
@@ -29,13 +29,16 @@ var rotate = function(nums, k) {
     // }
 
     // copy last k element
+    let n = nums.length;
+    let newk = k % n;
     let tempArray = [];
-    for(let  i = n - k, j = 0; i < n; i++, j++){
+    if(newk == 0) return;
+
+    for(let  i = n - newk, j = 0; i < n; i++, j++){
         tempArray[j] = nums[i]
     }
-
-    for(let i = n - 1; i >= k; i--) {
-        nums[i] = nums[i - k]; 
+    for(let i = n - 1; i >= newk; i--) {
+        nums[i] = nums[i - newk]; 
     }
 
     for(let i = 0; i < tempArray.length; i++ ) {
