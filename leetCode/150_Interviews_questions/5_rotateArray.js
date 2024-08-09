@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var rotate = function(nums, k) {
+var rotate = function (nums, k) {
     // let n = nums.length;
     // let lastIndex = n - 1;
 
@@ -29,20 +29,36 @@ var rotate = function(nums, k) {
     // }
 
     // copy last k element
+    // let n = nums.length;
+    // let newk = k % n;
+    // let tempArray = [];
+    // if(newk == 0) return;
+
+    // for(let  i = n - newk, j = 0; i < n; i++, j++){
+    //     tempArray[j] = nums[i]
+    // }
+    // for(let i = n - 1; i >= newk; i--) {
+    //     nums[i] = nums[i - newk]; 
+    // }
+
+    // for(let i = 0; i < tempArray.length; i++ ) {
+    //     nums[i] = tempArray[i]
+    // }
     let n = nums.length;
-    let newk = k % n;
-    let tempArray = [];
-    if(newk == 0) return;
+    let d = k % n;
 
-    for(let  i = n - newk, j = 0; i < n; i++, j++){
-        tempArray[j] = nums[i]
-    }
-    for(let i = n - 1; i >= newk; i--) {
-        nums[i] = nums[i - newk]; 
-    }
+    reverse(nums, 0, n - d - 1);
+    reverse (nums, n - d , n - 1);
 
-    for(let i = 0; i < tempArray.length; i++ ) {
-        nums[i] = tempArray[i]
-    }
+    reverse(nums, 0, n - 1)
+}
 
-};
+let reverse = (arr, start, end) => {
+    while(start < end) {
+        let temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
