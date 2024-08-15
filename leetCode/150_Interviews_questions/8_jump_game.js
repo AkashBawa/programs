@@ -1,3 +1,26 @@
+//  Using greedy approach
+
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+
+var canJump = function(nums) {
+    let currentJump = nums.length - 1;
+
+    for(let i = currentJump - 1; i >= 0; i-- ) {
+        let diff = currentJump - i;
+
+        if(diff <= nums[i]) {
+            currentJump = i;
+        }
+    }
+    if(currentJump == 0) {
+        return true
+    } else return false;
+};
+
+
 // Dymanic programming method
 /**
  * @param {number[]} nums
